@@ -17,7 +17,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $res = curl_exec($ch);
 curl_close($ch);
 $res2 = json_decode($res);
-
-echo "gameStartTime: ".$res2->gameStartTime;
+$tiempo = $res2->gameStartTime;
+echo "gameStartTime: ".$tiempo;
     
 
