@@ -21,7 +21,7 @@
     
 
 <?php
-if(!isset($_REQUEST['nombreInvocador']) || $_REQUEST['nombreInvocador'] == "" ){
+if(!isset($_REQUEST['nombreInvocador']) || $ _REQUEST['nombreInvocador'] == "" ){
     include("formulario.php");
 }else{
 
