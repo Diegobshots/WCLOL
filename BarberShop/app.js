@@ -1,39 +1,10 @@
-function smoothScroll(target, duration){
-    var target = document.querySelector(target);
-    var targetPosition = target.getBoundingClientRect().top;
-    var startPosition = window.pageYOffset;
-    var distance = targetPosition - startPosition;
-    var starTime = null;
-
-    function animation(currentTime){
-        if (starTime === null) starTime = currentTime;
-        var timeElapsed = currentTime - starTime;
-        var run = ease(timeElapsed, startPosition, distance, duration);
-        window.scroll(0, run);
-        if (timeElapsed < duration) requestAnimationFrame(animation);
+new fullpage('#fullpage', {
+    autoScrolling: true,
+    navigation: true,
+    onleave: (orgigin, destination, direction) => {
+        const section = destination.item;
+        const title = section.querySelector("h1");
+        const tl = new TimelineMax({ delay: 0.5 });
+        tl.fromTo(title, 0.5, { y: "50", opacity: 0 }, { y: 0, opacity: 1 })
     }
-
-    function ease(t, b, c, d){
-        t/= d / 2;
-        if (t < 1) return c / 2 * t * t + b;
-        t--;
-        return -c / 2 * (t * (t - 2) - 1) + b;
-    }
-    
-    requestAnimationFrame(animation);
-}
-
-var section1 = document.querySelector('.section1');
-section1.addEventListener('click', function(){
-    smoothScroll('.section2', 1000);
-})
-
-var section2 = document.querySelector('.section2');
-section2.addEventListener('click', function(){
-    smoothScroll('.section3', 1000);
-})
-
-var section3 = document.querySelector('.section3');
-section3.addEventListener('click', function(){
-    smoothScroll('.section1', 1000);
 })
